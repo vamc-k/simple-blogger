@@ -1,0 +1,28 @@
+<html>
+<head>
+	<title> Edit POST </title>
+	
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  
+</head>
+
+<body align="center">
+<div class="container">
+<div class="jumbotran"><h3>Edit Post</h3></div>
+	<form action="/update" method="POST">
+	{% for i in entries %}
+		title:<input type="text"  name="title" placeholder="Title of post" value="{{ i.title }}"/> <br/>
+		post:<input type="integer" name="body" placeholder="body of post" value="{{ i.post }}"/> <br/>
+		user:<input type="integer" name="user" placeholder="user name" value="{{ i.user }}"/> <br/>
+		<input type="hidden" name="oldUser" value="{{ i.user }}"/>
+		<input type="hidden" name="oldTime" value="{{ i.time }}"/>
+		<input type="submit" value="post"  align="center"/>
+	{% endfor %}
+	</form>
+</div>
+</body>
+</html>

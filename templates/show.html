@@ -1,0 +1,58 @@
+<html>
+<head>
+	<title>Posts</title>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	
+	<script>
+	function val(a){
+		if(a.id == 'create'){
+			document.getElementById('edit').action = "/add";
+			document.getElementById('edit').method = "GET";
+			document.getElementById("edit").submit();
+		}
+		
+		var x=a.parentElement.parentElement.parentElement.parentElement.id;
+		var y=document.getElementById(x).querySelector("table tr:nth-child(2) td:nth-child(3)").innerHTML;
+		var z=document.getElementById(x).querySelector("table tr:nth-child(2) td:nth-child(4)").innerHTML;
+		
+		document.getElementById('user').value=y;
+		document.getElementById('time').value=z;
+		
+		if(a.id == 'edit'){
+			document.getElementById('edit').action = "/edit";
+			document.getElementById("edit").submit();
+		}
+		else{
+			document.getElementById('edit').action = "/delete";
+			document.getElementById("edit").submit();
+		}
+	}
+	</script>
+</head>
+<body align="center">
+<div class="container">
+<form id="edit" method="post" name="editForm">
+			<input type="hidden" id="user" name="user1"/>
+			<input type="hidden" id="time" name="time1"/>
+</form>
+<div class="jumbotron"><h3>BLOG POSTS</h3></div>
+<table class="table table-bordered">
+	<tr><td><input type="submit" value="Create a Post" id="create" onclick="val(this)"/></td></tr>
+{% for i in entries %}
+	<tr><td><table id="{{ i.user+i.time }}" class="table table-stripped">
+		<tr><th>Title</th><th>Post</th><th>User</th><th>Time</th></tr>
+		<tr><td>{{ i.title }}</td><td>{{ i.post }}</td>
+		<td id="un">{{ i.user }}</td><td id="t">{{ i.time }}</td></tr>
+		<tr><td>
+			<input type="submit" value="edit" id="edit" onclick="val(this)"/></td>
+			<td><input type="submit" value="delete" id="delete" onclick="val(this)"/></td></tr>
+	</tr></table></td></tr>
+{% endfor %}
+</table>
+</div>
+</body>
+</html>
