@@ -1,2 +1,2 @@
 # simple-blogger
-Simple blogger application using flask
+Simple blogger application using flask.
